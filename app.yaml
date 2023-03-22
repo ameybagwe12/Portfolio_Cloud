@@ -1,0 +1,55 @@
+application: game-2024
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+
+
+handlers:
+- url: /css
+  static_dir: static/css
+
+- url: /js
+  static_dir: static/js
+
+- url: /images
+  static_dir: static/images
+
+- url: /others
+  static_dir: static/others
+
+# - url: /(.+\.(css|js))$
+#   static_files: static
+#   upload: static/.+\.(css|js)$
+#   application_readable: true
+
+
+# - url: /(.+\.(jpg|png|jpeg))$
+#   static_files: static
+#   upload: static/.+\.(jpg|png|jpeg)$
+#   application_readable: true
+
+# - url: /(.+\.(svg|eot|ttf|woff|html|pdf))$
+#   static_files: static
+#   upload: static/.+\.(svg|eot|ttf|woff|html|pdf)$
+#   application_readable: true
+
+- url: /_ah/mail/info@.*game-2024\.appspotmail\.com
+  script: mailredirector.application
+  login: admin
+
+
+
+- url: /.*
+  script: main.application
+
+
+inbound_services:
+- mail
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
